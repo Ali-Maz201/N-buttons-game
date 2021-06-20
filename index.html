@@ -1,0 +1,47 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <title>Guess the button</title>
+  </head>
+  <body>
+    <div class="container text-center" >
+      <h3>Guess the lucky button</h3>
+      <form class="form-inline m-5">
+        <div class="container">
+          <input type="number" class="form-control" id="buttonsToAdd" placeholder="Type a number">
+          <button class="btn btn-primary " onclick="return createButtons()">Click Me !</button>
+        </div>
+      </form>
+
+      <div class="container" id="message"></div>
+
+      <div class="container" id="buttons"></div>
+    </div>
+
+    <script>
+    var randomNumber;
+    function createButtons() {
+      let inputNumber = document.getElementById("buttonsToAdd").value;
+      randomNumber = Math.floor(Math.random() * inputNumber);
+      for (let i = 1; i <= inputNumber; i++) {
+        $("#buttons").append(`<button type="button" id="` + i + `"class="btn btn-danger m-3" onclick="message(this.id)">Button ` + i + `</button>`);
+      }
+      return false;
+    }
+
+    function message(id) {
+      let message = document.getElementById("message");
+      if (id == randomNumber) {
+        message.innerHTML = "It's your lucky day, you should get a loto ticket :)";
+      } else {
+        message.innerHTML = "Wrong button, don't give up !";
+      }
+      setTimeout(function(){
+         window.location.reload(1);
+      }, 2000);
+    }
+    </script>
+  </body>
+</html>
